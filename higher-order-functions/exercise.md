@@ -3,7 +3,6 @@
 ## Challenge 1
 Create a function `addTwo` that accepts one input and adds 2 to it.
 
-
 ## Challenge 2
 Create a function `addS` that accepts one input and adds an "s" to it.
 
@@ -49,7 +48,6 @@ Here's how it works. The function has an "accumulator value" which starts as the
 
 ## Extension 3
 Construct a function intersection that compares input arrays and returns a new array with elements found in all of the inputs. Use reduce!
-
 
 ## Extension 4
 Construct a function union that compares input arrays and returns a new array that contains all elements. If there are duplicate elements, only add it once to the new array. Preserve the order of the elements starting from the first element of the first input array. Use reduce!
