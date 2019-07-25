@@ -18,10 +18,10 @@ var counter = (function() {
   };
 })();
 
-counter.value();
-counter.increment();
-counter.increment();
-counter.value();
-counter.decrement();
-counter.value();
+counter.value();// 0
+counter.increment();//undefined
+counter.increment();//undefined
+counter.value();//1
+counter.decrement();//undefined
+counter.value();//2
 

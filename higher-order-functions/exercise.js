@@ -52,7 +52,7 @@ mapWith([1,2,3], (element) => element * 3) // [3, 6, 9]
 function reduce(array, callback, initialValue) {
     let acc = initialValue;
     array.forEach(function(element) {
-        acc =  callback(acc, element);
+        acc = callback(acc, element);
     });
     return acc;
 }
@@ -63,14 +63,14 @@ reduce(nums, add, 0);   //-> 8
 
 //Extension 3
 function concat(a, b) {
-    return a.filter(function(el) {
-      return b.includes(el);
+    return a.filter(function(element) {
+      return b.includes(element);
     });
 }
 function reduce(array, callback, initialValue) {
     let acc = initialValue;
     array.forEach(function(element) {
-        acc =  callback(acc, element);
+        acc = callback(acc, element);
     });
     return acc;
 }
@@ -83,15 +83,15 @@ console.log(intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20])
 
 //Extension 4
 function unique(a, b) {
-    return a.concat(b.filter(function(el) {
-        return a.includes(el) === false;
+    return a.concat(b.filter(function(element) {
+        return a.includes(element) === false;
       })
     );
 }
 function reduce(array, callback, initialValue) {
     let acc = initialValue;
     array.forEach(function(element) {
-        acc =  callback(acc, element);
+        acc = callback(acc, element);
     });
     return acc;
 }
@@ -99,20 +99,30 @@ function union(arrays) {
     var args = Array.from(arguments);
     return reduce(args, unique, args[0]);
 }
-console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5])); //[5, 10, 15, 88, 1, 7, 100]
+console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));  // [5, 10, 15, 88, 1, 7, 100]
 
 //Extension 5
-function objOfMatches(array1, array2, callback) {
-    
+function objMatches(arr1, arr2, callback) {
+    return arr1.reduce(function(acc, word, index) {
+        if (callback(word) === arr2[index]) {
+            acc[word] = arr2[index];
+        }
+        return acc;
+}, {})
 }
-
-// console.log(objOfMatches(['hi', 'howdy', 'bye', 'later', 'hello'], ['HI', 'Howdy', 'BYE', 'LATER', 'hello'], function(str) { return str.toUpperCase(); }));
-// should log: { hi: 'HI', bye: 'BYE', later: 'LATER' }
-
-
+console.log(objOfMatches(['hi', 'howdy', 'bye', 'later', 'hello'], ['HI', 'Howdy', 'BYE', 'LATER', 'hello'], function(str) { return str.toUpperCase(); }));
+//{ hi: 'HI', bye: 'BYE', later: 'LATER' }
 
 //Extension 6
-function multiMap(arrVals, arrCallbacks) {}
+function multiMap(arrVals, arrCallbacks) {
+	return arrVals.reduce(function(acc, word) {
+		acc[word] = arrCallbacks.reduce(function(array, func) {
+			array.push(func(word))
+			return array
+        }, [])
+	return acc 
+    }, {})
+}
 
 // console.log(multiMap(['catfood', 'glue', 'beer'], [function(str) { return str.toUpperCase(); }, function(str) { return str[0].toUpperCase() + str.slice(1).toLowerCase(); }, function(str) { return str + str; }]));
 // should log: { catfood: ['CATFOOD', 'Catfood', 'catfoodcatfood'], glue: ['GLUE', 'Glue', 'glueglue'], beer: ['BEER', 'Beer', 'beerbeer'] }
